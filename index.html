@@ -16,11 +16,28 @@
     <meta property="og:description" content="Your personalized smart dashboard">
     <meta property="og:type" content="website">
 
+      <!-- font awesome icons- reference taken from-W3school website: Front-Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+    <!-- google fonts for the font style -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+
     <link rel="stylesheet" href="index.css">
 
 </head>
 
 <body>
+        <!-- Sidebar Navigation -->
+    <nav class="sidebar" aria-label="Main Navigation">
+        <ul>
+             <li><a href="#"><i class="fas fa-home"></i> Dashboard</a></li>
+            <li><a href="#todo-section"><i class="fas fa-list"></i> To-Do</a></li>
+            <li><a href="#goals-section"><i class="fas fa-bullseye"></i> Goals</a></li>
+            <li><a href="#notes-section"><i class="fas fa-notes-medical"></i> Private Notes</a></li>
+            <li><a href="#settings-panel"><i class="fas fa-cog"></i> Settings</a></li>
+        </ul>
+    </nav>
+    
     <!-- choose a simple navbar without using a nav just used header -->
     <header class="main-header" role="banner">
         <h1>Personal Dashboard</h1>
