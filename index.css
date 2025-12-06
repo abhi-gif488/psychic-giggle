@@ -1,0 +1,364 @@
+body {
+    font-family: 'Inter', sans-serif;
+    transition: background-color 0.5s, color 0.5s;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+
+    /* variables for theme */
+    background: var(--bg);
+    color: var(--text);
+    margin: 0;
+    box-sizing: border-box;
+}
+
+/* Light & dark theme variables */
+.light {
+    --bg: #f5f5f5;
+    --text: #1a1a1a;
+    --widget-bg: #ffffff;
+    --widget-border: #dcdcdc;
+    --header-bg: #e9ecef;
+    --sidebar-bg: #fafafa;
+    --sidebar-text: #333;
+}
+
+.dark {
+    --bg: #18191a;
+    --text: #f1f1f1;
+    --widget-bg: #242526;
+    --widget-border: #3a3b3c;
+    --header-bg: #2b2b2b;
+    --sidebar-bg: #0f1112;
+    --sidebar-text: #e4e6eb;
+}
+
+/* setting and theme toggle */
+.header-buttons button {
+    margin-left: 12px;
+    padding: 8px 12px;
+    border: none;
+    border-radius: 8px;
+    background: #4c6ef5;
+    color: white;
+    cursor: pointer;
+    font-family: inherit;
+    transition: background 0.3s, transform 0.2s;
+}
+
+/* header section */
+
+.main-header, header {
+    background: var(--header-bg);
+    padding: 18px 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid var(--widget-border);
+    position: fixed;
+    left: 220px;
+    right: 0;
+    top: 0;
+    height: 64px;
+    z-index: 20;
+}
+
+.main-header h1 {
+    margin: 0;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+}
+
+
+/* total Dashboard */
+
+.dashboard {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 25px;
+    padding: 30px;
+    margin-left: 240px; /* space for sidebar */
+    margin-top: 90px; /* space for header */
+    align-items: start;
+}
+
+.widget {
+    background: var(--widget-bg);
+    border: 1px solid var(--widget-border);
+    padding: 22px;
+    border-radius: 12px;
+    transition: transform 0.25s, box-shadow 0.25s;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.06);
+
+  
+}
+
+
+.widget:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 12px 28px rgba(0,0,0,0.12);
+}
+
+/* widget headings */
+.widget h2 {
+    margin-top: 0;
+    font-family: 'Poppins', sans-serif;
+    font-size: 1.05rem;
+}
+
+/* clock section */
+
+/* CLOCK CARD */
+.clock-card {
+    height: 350px;
+    
+}
+
+/* Digital Clock */
+#clock-display .digital {
+    font-size: 28px;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 15px;
+}
+
+/* Analog Clock Container */
+#clock-display .analog {
+    position: relative;
+    width: 120px;
+    height: 120px;
+    margin: 0 auto;
+    border: 4px solid #333;
+    border-radius: 50%;
+    background: white;
+}
+
+/* Clock Hands */
+#clock-display .hand {
+    position: absolute;
+    bottom: 50%;
+    left: 50%;
+    transform-origin: bottom;
+    background: #333;
+    border-radius: 3px;
+}
+
+/* Hour hand */
+#clock-display .hand.hour {
+    width: 6px;
+    height: 35px;
+}
+
+/* Minute hand */
+#clock-display .hand.minute {
+    width: 4px;
+    height: 50px;
+}
+
+/* Second hand */
+#clock-display .hand.second {
+    width: 2px;
+    height: 55px;
+    background: red;
+}
+
+
+#calendar-container {
+    padding: 10px;
+}
+
+.calendar-header {
+    font-weight: 600;
+    text-align: center;
+    margin-bottom: 10px;
+    font-size: 18px;
+    color: var(--text);
+}
+
+.calendar-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 6px;
+}
+
+.day-label {
+    font-size: 12px;
+    font-weight: 600;
+    text-align: center;
+    color: var(--text);
+    opacity: 0.8;
+}
+
+.day, .empty {
+    height: 38px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--surface);
+    border-radius: 10px;
+    font-size: 14px;
+}
+
+.today {
+    background: #4c8bf5;
+    color: white;
+    font-weight: bold;
+}
+
+/* to-do list section */
+
+.todo-input-row, .goal-input-row {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    margin-bottom: 12px;
+}
+
+.widget input[type="text"] {
+    width: 100%;
+    padding: 10px 12px;
+    border-radius: 8px;
+    border: 1px solid var(--widget-border);
+    background: transparent;
+    color: var(--text);
+    outline: none;
+    font-family: inherit;
+}
+
+.widget button {
+    padding: 8px 12px;
+    border: none;
+    border-radius: 8px;
+    background: #4c6ef5;
+    color: white;
+    cursor: pointer;
+    font-family: inherit;
+}
+
+.widget button:hover { transform: translateY(-2px); }
+
+/* list styles */
+
+#todo-list {
+     list-style: none;
+     padding: 0; 
+     margin: 0;
+      display: flex; 
+      flex-direction: column; 
+      gap: 8px; }
+.todo-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 10px;
+    border-radius: 8px;
+    background: rgba(0,0,0,0.03);
+}
+.todo-item button { background: #ef4444; padding: 6px 10px; }
+
+/* goal section */
+
+.progress-bar {
+    width: 100%;
+    height: 16px;
+    background: #eee;
+    border-radius: 999px;
+    overflow: hidden;
+    margin: 8px 0 12px;
+}
+.progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg,#4caf50,#2bb673);
+    transition: width 0.6s ease;
+    width: 0%;
+}
+
+/* toast */
+
+.toast-message {
+    background: #4c6ef5;
+    color: #fff;
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    padding: 12px 18px;
+    border-radius: 8px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.12);
+    z-index: 9999;
+}
+
+/* setting pannel */
+
+#settings-panel {
+    background: var(--widget-bg);
+    border: 1px solid var(--widget-border);
+    padding: 18px;
+    border-radius: 12px;
+    width: 300px;
+    position: fixed;
+    top: 80px;
+    right: 20px;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.12);
+    z-index: 50;
+}
+
+.hidden { display: none; }
+
+/* Responsive things */
+
+@media (max-width: 900px) {
+    .dashboard {
+        margin-left: 0;
+        padding: 20px;
+    }
+    .sidebar { display: none; }
+    .main-header, header { left: 0; }
+}
+
+/* Keep your font rules */
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+    letter-spacing: 0.2px;
+}
+
+.sidebar a { 
+    font-family: 'Inter', sans-serif;
+     font-weight: 500;
+     }
+.widget h2, .widget-title { 
+    font-family: 'Poppins', sans-serif; 
+    font-weight: 600; 
+}
+
+button { font-family: 'Inter', sans-serif; 
+    font-weight: 500;
+ }
+input, select, textarea { 
+    font-family: 'Inter', sans-serif; 
+}
+
+/* small utility */
+.text-muted { color: rgba(0,0,0,0.5); }
+
+
+/* private-notes section */
+
+#notes-text {
+    width: 95%;
+    height: 100px;
+    padding: 10px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+}
+
+
+
+.footer {
+    text-align: center;
+    margin-left: 220px;
+    padding: 20px;
+    color: #555;
+    position: relative;
+    
+}
