@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Personal Dashboard</title>
+
+    <!-- professional Meta tags -->
+    <meta name="description" content="A personalized productivity dashboard including clock, calendar, weather, quote widget, to-do list, goals tracker and more.">
+    <meta name="keywords" content="dashboard, productivity, tasks, goals, weather, clock, calendar">
+    <meta name="author" content="Abhishek Kumar">
+
+    <!-- a social tags -->
+    <meta property="og:title" content="Personal Dashboard">
+    <meta property="og:description" content="Your personalized smart dashboard">
+    <meta property="og:type" content="website">
+
+</head>
+
+<body>
+    <!-- choose a simple navbar without using a nav just used header -->
+    <header class="main-header" role="banner">
+        <h1>Personal Dashboard</h1>
+        <div class="header-buttons" role="toolbar" aria-label="Header actions">
+            <button id="settings-toggle" aria-label="Open Settings"><i class="fas fa-cog"></i> Settings</button>
+            <button class="header-buttons" id="theme-toggle" aria-pressed="false">Toggle Theme</button>
+        </div>
+    </header>
+
+    <!-- Settings Panel -->
+    <aside id="settings-panel" class="hidden" aria-label="Settings Panel" role="complementary">
+        <h2>Settings</h2>
+        <label><input type="checkbox" id="show-quote"> Show Quote Widget</label>
+
+        <div class="settings-actions">
+            <button id="export-data"><i class="fas fa-file-export"></i> Export Data</button>
+            <button id="import-data"><i class="fas fa-file-import"></i> Import Data</button>
+        </div>
+    </aside>
+
+    <!-- Main Dashboard Where we can navigate... -->
+    <main class="dashboard" role="main">
+        <!-- Clock Widget -->
+     <div class="card clock-card">
+        <h2>Clock</h2>
+        <div id="clock-display"></div>
+    </div>
+
+        </section>
+
+        <!-- Calendar section -->
+        <section class="widget" id="calendar-widget">
+            <h2>Calendar</h2>
+            <div id="calendar-container"></div>
+        </section>
+
+
+
+        <!-- Quote section -->
+        <section class="widget quote" aria-label="Quote of the Day" id="quote-widget">
+            <h2>Quote of the Day</h2>
+            <div id="quote-display" aria-live="polite"></div>
+        </section>
+
+        <!-- To-Do list section -->
+        <section id="todo-section" class="widget todo" aria-label="To-Do List">
+            <h2>To-Do List</h2>
+            <div class="todo-input-row">
+                <input type="text" id="todo-input" placeholder="Add task" aria-label="Add task">
+                <button id="add-todo" aria-label="Add todo"><i class="fas fa-plus"></i></button>
+            </div>
+            <ul id="todo-list" aria-live="polite"></ul>
+            <button id="start-pomodoro">Start Pomodoro (25 min)</button>
+        </section>
+
+        <!-- Goals section-->
+        <section id="goals-section" class="widget goals" aria-label="Goals Tracker">
+            <h2>Goals Tracker</h2>
+            <div class="goal-input-row">
+                <input type="text" id="goal-input" placeholder="Add goal" aria-label="Add goal">
+                <button id="add-goal" aria-label="Add goal"><i class="fas fa-plus"></i></button>
+            </div>
+            <div id="goals-list" aria-live="polite"></div>
+        </section>
+
+    </main>
+
+</body>
+</html>
