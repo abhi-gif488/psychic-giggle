@@ -1,403 +1,823 @@
+/* 
+   CSS VARIABLES - Light & Dark Theme
+   */
+
+body.light {
+    --bg: #f0f2f5;
+    --text: #1a1a2e;
+    --widget-bg: #ffffff;
+    --widget-border: #e0e0e0;
+    --header-bg: #ffffff;
+    --sidebar-bg: #1a1a2e;
+    --sidebar-text: #e0e0f0;
+    --sidebar-hover: rgba(255, 255, 255, 0.1);
+    --btn-bg: #4c6ef5;
+    --btn-hover: #3b5bdb;
+    --shadow: rgba(0, 0, 0, 0.08);
+}
+
+body.dark {
+    --bg: #0f1117;
+    --text: #e8e8f0;
+    --widget-bg: #1e1e2e;
+    --widget-border: #2e2e4e;
+    --header-bg: #1e1e2e;
+    --sidebar-bg: #12121e;
+    --sidebar-text: #c8c8e0;
+    --sidebar-hover: rgba(255, 255, 255, 0.08);
+    --btn-bg: #4c6ef5;
+    --btn-hover: #3b5bdb;
+    --shadow: rgba(0, 0, 0, 0.3);
+}
+
+/* 
+   RESET & BASE STYLES
+ */
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
 body {
     font-family: 'Inter', sans-serif;
-    transition: background-color 0.5s, color 0.5s;
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh;
-
-    /* variables for theme */
     background: var(--bg);
     color: var(--text);
-    margin: 0;
-    box-sizing: border-box;
+    min-height: 100vh;
+    transition: background 0.4s, color 0.4s;
 }
 
-/* Light & dark theme variables */
-.light {
-    --bg: #f5f5f5;
-    --text: #1a1a1a;
-    --widget-bg: #ffffff;
-    --widget-border: #dcdcdc;
-    --header-bg: #e9ecef;
-    --sidebar-bg: #fafafa;
-    --sidebar-text: #333;
+h1, h2, h3 {
+    font-family: 'Poppins', sans-serif;
 }
 
-.dark {
-    --bg: #18191a;
-    --text: #f1f1f1;
-    --widget-bg: #242526;
-    --widget-border: #3a3b3c;
-    --header-bg: #2b2b2b;
-    --sidebar-bg: #0f1112;
-    --sidebar-text: #e4e6eb;
-}
+/* 
+   HAMBURGER BUTTON (mobile only)
+    */
 
-/* setting and theme toggle */
-.header-buttons button {
-    margin-left: 12px;
-    padding: 8px 12px;
+#menu-btn {
+    display: none; /* hidden on desktop */
+    position: fixed;
+    top: 15px;
+    left: 15px;
+    z-index: 200;
+    background: var(--btn-bg);
+    color: white;
     border: none;
     border-radius: 8px;
-    background: #4c6ef5;
-    color: white;
+    padding: 10px 14px;
+    font-size: 18px;
     cursor: pointer;
-    font-family: inherit;
-    transition: background 0.3s, transform 0.2s;
 }
 
-/* header section */
+/* 
+   SIDEBAR OVERLAY (mobile dark bg)
+ */
 
-.main-header, header {
-    background: var(--header-bg);
-    padding: 18px 30px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    border-bottom: 1px solid var(--widget-border);
+#sidebar-overlay {
+    display: none;
     position: fixed;
-    left: 220px;
-    right: 0;
     top: 0;
-    height: 64px;
-    z-index: 20;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 98;
 }
 
-.main-header h1 {
-    margin: 0;
-    font-family: 'Poppins', sans-serif;
-    font-weight: 600;
+#sidebar-overlay.show {
+    display: block;
 }
 
-/* sidebar section */
+/*
+   SIDEBAR
+ */
 
 .sidebar {
     background: var(--sidebar-bg);
     color: var(--sidebar-text);
+    width: 230px;
     height: 100vh;
-    width: 220px;
-    padding-top:  20px;
     position: fixed;
-    box-shadow: 3px 0 10px rgba(0,0,0,0.06);
+    top: 0;
+    left: 0;
+    z-index: 99;
+    padding: 20px 15px;
+    overflow-y: auto;
+    transition: transform 0.3s ease;
+}
+
+.sidebar-logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: white;
+    font-size: 1.2rem;
+    font-weight: 700;
+    font-family: 'Poppins', sans-serif;
+    margin-bottom: 30px;
+    padding: 10px 5px;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
 }
 
 .sidebar ul {
     list-style: none;
-    padding: 0;
-    margin: 0;
 }
 
-.sidebar li { margin-bottom: 8px; }
+.sidebar li {
+    margin-bottom: 5px;
+}
 
 .sidebar a {
-    display: block;
+    display: flex;
+    align-items: center;
+    gap: 12px;
     padding: 12px 15px;
     border-radius: 10px;
-    margin-bottom: 12px;
     text-decoration: none;
     color: var(--sidebar-text);
-    transition: 0.22s;
-    font-size: 1.05rem;
+    font-size: 0.95rem;
     font-weight: 500;
+    transition: background 0.2s, transform 0.2s;
+}
+
+.sidebar a:hover {
+    background: var(--sidebar-hover);
+    transform: translateX(5px);
+    color: white;
+}
+
+.sidebar a i {
+    width: 18px;
+    text-align: center;
+    opacity: 0.8;
+}
+
+/* Close button inside sidebar - only visible on mobile */
+#close-sidebar {
+    display: none;
+    background: rgba(255,255,255,0.1);
+    border: none;
+    color: white;
+    font-size: 16px;
+    border-radius: 8px;
+    padding: 8px 12px;
+    cursor: pointer;
+    margin-bottom: 15px;
+    float: right;
+}
+
+/* 
+   HEADER
+    */
+
+.main-header {
+    position: fixed;
+    top: 0;
+    left: 230px; /* same as sidebar width */
+    right: 0;
+    height: 65px;
+    background: var(--header-bg);
+    border-bottom: 1px solid var(--widget-border);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 25px;
+    z-index: 50;
+    box-shadow: 0 2px 10px var(--shadow);
+}
+
+.main-header h1 {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: var(--text);
+}
+
+.header-buttons {
+    display: flex;
+    gap: 10px;
     align-items: center;
 }
 
-.sidebar a i { margin-right: 10px; width: 20px; text-align: center; }
-
-.sidebar a:hover {
-    background: rgba(100, 100, 255, 0.08);
-    transform: translateX(6px);
+.header-buttons button {
+    padding: 8px 16px;
+    background: var(--btn-bg);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 0.85rem;
+    font-family: 'Inter', sans-serif;
+    font-weight: 500;
+    transition: background 0.2s, transform 0.2s;
 }
 
-/* total Dashboard */
+.header-buttons button:hover {
+    background: var(--btn-hover);
+    transform: translateY(-1px);
+}
+
+/* 
+   SETTINGS PANEL (popup)
+   */
+
+#settings-panel {
+    position: fixed;
+    top: 75px;
+    right: 20px;
+    background: var(--widget-bg);
+    border: 1px solid var(--widget-border);
+    border-radius: 12px;
+    padding: 20px;
+    width: 260px;
+    z-index: 100;
+    box-shadow: 0 8px 24px var(--shadow);
+}
+
+#settings-panel h2 {
+    font-size: 1rem;
+    margin-bottom: 15px;
+}
+
+#settings-panel label {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.9rem;
+    margin-bottom: 15px;
+    cursor: pointer;
+}
+
+.settings-actions {
+    margin-top: 10px;
+}
+
+.settings-actions button {
+    width: 100%;
+    padding: 10px;
+    background: var(--btn-bg);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-family: 'Inter', sans-serif;
+    font-weight: 500;
+    transition: background 0.2s;
+}
+
+.settings-actions button:hover {
+    background: var(--btn-hover);
+}
+
+.hidden {
+    display: none !important;
+}
+
+/* 
+   MAIN DASHBOARD GRID
+    */
 
 .dashboard {
+    margin-left: 230px; /* same as sidebar width */
+    margin-top: 65px;   /* same as header height */
+    padding: 25px;
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-    gap: 25px;
-    padding: 30px;
-    margin-left: 240px; /* space for sidebar */
-    margin-top: 90px; /* space for header */
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
     align-items: start;
+    min-height: calc(100vh - 65px - 60px);
 }
+
+
 
 .widget {
     background: var(--widget-bg);
     border: 1px solid var(--widget-border);
+    border-radius: 14px;
     padding: 22px;
-    border-radius: 12px;
+    box-shadow: 0 4px 16px var(--shadow);
     transition: transform 0.25s, box-shadow 0.25s;
-    box-shadow: 0 6px 18px rgba(0,0,0,0.06);
-
-  
 }
-
 
 .widget:hover {
-    transform: translateY(-6px);
-    box-shadow: 0 12px 28px rgba(0,0,0,0.12);
+    transform: translateY(-4px);
+    box-shadow: 0 10px 28px var(--shadow);
 }
 
-/* widget headings */
 .widget h2 {
-    margin-top: 0;
-    font-family: 'Poppins', sans-serif;
-    font-size: 1.05rem;
-}
-
-/* clock section */
-
-/* CLOCK CARD */
-.clock-card {
-    height: 350px;
-    
-}
-
-/* Digital Clock */
-#clock-display .digital {
-    font-size: 28px;
-    font-weight: bold;
-    text-align: center;
+    font-size: 1rem;
+    font-weight: 600;
     margin-bottom: 15px;
+    color: var(--text);
+    display: flex;
+    align-items: center;
+    gap: 8px;
 }
 
-/* Analog Clock Container */
+.widget h2 i {
+    color: var(--btn-bg);
+    font-size: 0.95rem;
+}
+
+
+
+#clock-display .digital {
+    font-size: 2rem;
+    font-weight: 700;
+    text-align: center;
+    margin-bottom: 20px;
+    font-family: 'Poppins', sans-serif;
+    letter-spacing: 2px;
+    color: var(--btn-bg);
+}
+
 #clock-display .analog {
     position: relative;
-    width: 120px;
-    height: 120px;
+    width: 130px;
+    height: 130px;
     margin: 0 auto;
-    border: 4px solid #333;
+    border: 4px solid var(--widget-border);
     border-radius: 50%;
-    background: white;
+    background: var(--widget-bg);
+    box-shadow: 0 4px 12px var(--shadow);
 }
 
-/* Clock Hands */
 #clock-display .hand {
     position: absolute;
     bottom: 50%;
     left: 50%;
     transform-origin: bottom;
-    background: #333;
-    border-radius: 3px;
+    background: var(--text);
+    border-radius: 4px;
 }
 
-/* Hour hand */
 #clock-display .hand.hour {
     width: 6px;
-    height: 35px;
+    height: 36px;
+    margin-left: -3px;
 }
 
-/* Minute hand */
 #clock-display .hand.minute {
     width: 4px;
     height: 50px;
+    margin-left: -2px;
 }
 
-/* Second hand */
 #clock-display .hand.second {
     width: 2px;
     height: 55px;
-    background: red;
+    margin-left: -1px;
+    background: #ef4444;
 }
 
 
-#calendar-container {
-    padding: 10px;
-}
 
 .calendar-header {
     font-weight: 600;
     text-align: center;
-    margin-bottom: 10px;
-    font-size: 18px;
-    color: var(--text);
+    margin-bottom: 12px;
+    font-size: 1rem;
 }
 
 .calendar-grid {
     display: grid;
     grid-template-columns: repeat(7, 1fr);
-    gap: 6px;
+    gap: 4px;
 }
 
 .day-label {
-    font-size: 12px;
+    font-size: 11px;
     font-weight: 600;
     text-align: center;
-    color: var(--text);
-    opacity: 0.8;
+    opacity: 0.6;
+    padding: 4px 0;
 }
 
 .day, .empty {
-    height: 38px;
+    height: 34px;
     display: flex;
     align-items: center;
     justify-content: center;
-    background: var(--surface);
-    border-radius: 10px;
-    font-size: 14px;
+    border-radius: 8px;
+    font-size: 13px;
+    cursor: default;
+}
+
+.day:hover {
+    background: rgba(76, 110, 245, 0.1);
 }
 
 .today {
-    background: #4c8bf5;
+    background: var(--btn-bg);
     color: white;
-    font-weight: bold;
+    font-weight: 700;
+    border-radius: 8px;
 }
 
-/* to-do list section */
 
-.todo-input-row, .goal-input-row {
+
+.quote-block {
+    font-style: italic;
+    font-size: 0.95rem;
+    line-height: 1.6;
+    margin-bottom: 10px;
+    opacity: 0.9;
+    border-left: 3px solid var(--btn-bg);
+    padding-left: 12px;
+}
+
+.quote-author {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--btn-bg);
+}
+
+.quote-actions {
+    margin-top: 14px;
+}
+
+
+
+.input-row {
     display: flex;
-    gap: 10px;
-    align-items: center;
+    gap: 8px;
+    margin-bottom: 15px;
+}
+
+.input-row input {
+    flex: 1;
+    padding: 10px 14px;
+    border: 1px solid var(--widget-border);
+    border-radius: 8px;
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Inter', sans-serif;
+    font-size: 0.9rem;
+    outline: none;
+    transition: border 0.2s;
+}
+
+.input-row input:focus {
+    border-color: var(--btn-bg);
+}
+
+.input-row button {
+    padding: 10px 14px;
+    background: var(--btn-bg);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background 0.2s, transform 0.2s;
+    flex-shrink: 0;
+}
+
+.input-row button:hover {
+    background: var(--btn-hover);
+    transform: scale(1.05);
+}
+
+/* ================================
+   TODO LIST
+   ================================ */
+
+#todo-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
     margin-bottom: 12px;
 }
 
-.widget input[type="text"] {
-    width: 100%;
-    padding: 10px 12px;
-    border-radius: 8px;
-    border: 1px solid var(--widget-border);
-    background: transparent;
-    color: var(--text);
-    outline: none;
-    font-family: inherit;
-}
-
-.widget button {
-    padding: 8px 12px;
-    border: none;
-    border-radius: 8px;
-    background: #4c6ef5;
-    color: white;
-    cursor: pointer;
-    font-family: inherit;
-}
-
-.widget button:hover { transform: translateY(-2px); }
-
-/* list styles */
-
-#todo-list {
-     list-style: none;
-     padding: 0; 
-     margin: 0;
-      display: flex; 
-      flex-direction: column; 
-      gap: 8px; }
 .todo-item {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 8px 10px;
+    padding: 10px 12px;
     border-radius: 8px;
-    background: rgba(0,0,0,0.03);
+    background: var(--bg);
+    border: 1px solid var(--widget-border);
+    font-size: 0.9rem;
 }
-.todo-item button { background: #ef4444; padding: 6px 10px; }
 
-/* goal section */
+.todo-item span {
+    flex: 1;
+    margin-right: 10px;
+}
+
+.todo-item button, .btn-delete {
+    padding: 6px 12px;
+    background: #ef4444;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 0.8rem;
+    font-family: 'Inter', sans-serif;
+    transition: background 0.2s;
+}
+
+.todo-item button:hover, .btn-delete:hover {
+    background: #dc2626;
+}
+
+/* ================================
+   GOALS TRACKER
+   ================================ */
+
+.goal-item {
+    margin-bottom: 14px;
+    padding: 12px;
+    background: var(--bg);
+    border: 1px solid var(--widget-border);
+    border-radius: 8px;
+}
+
+.goal-item p {
+    font-weight: 600;
+    font-size: 0.9rem;
+    margin-bottom: 6px;
+}
+
+.goal-item-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 8px;
+}
+
+.goal-item-header p {
+    margin: 0;
+}
+
+.btn-inc {
+    padding: 5px 10px;
+    background: #22c55e;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 0.8rem;
+    font-family: 'Inter', sans-serif;
+    margin-right: 6px;
+    transition: background 0.2s;
+}
+
+.btn-inc:hover {
+    background: #16a34a;
+}
+
+.btn-del {
+    padding: 5px 10px;
+    background: #ef4444;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 0.8rem;
+    font-family: 'Inter', sans-serif;
+    transition: background 0.2s;
+}
+
+.btn-del:hover {
+    background: #dc2626;
+}
 
 .progress-bar {
     width: 100%;
-    height: 16px;
-    background: #eee;
+    height: 10px;
+    background: var(--widget-border);
     border-radius: 999px;
     overflow: hidden;
-    margin: 8px 0 12px;
 }
+
 .progress-fill {
     height: 100%;
-    background: linear-gradient(90deg,#4caf50,#2bb673);
-    transition: width 0.6s ease;
+    background: linear-gradient(90deg, #4caf50, #2bb673);
+    border-radius: 999px;
+    transition: width 0.5s ease;
     width: 0%;
 }
 
-/* toast */
-
-.toast-message {
-    background: #4c6ef5;
-    color: #fff;
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
-    padding: 12px 18px;
-    border-radius: 8px;
-    box-shadow: 0 8px 20px rgba(0,0,0,0.12);
-    z-index: 9999;
-}
-
-/* setting pannel */
-
-#settings-panel {
-    background: var(--widget-bg);
-    border: 1px solid var(--widget-border);
-    padding: 18px;
-    border-radius: 12px;
-    width: 300px;
-    position: fixed;
-    top: 80px;
-    right: 20px;
-    box-shadow: 0 6px 20px rgba(0,0,0,0.12);
-    z-index: 50;
-}
-
-.hidden { display: none; }
-
-/* Responsive things */
-
-@media (max-width: 900px) {
-    .dashboard {
-        margin-left: 0;
-        padding: 20px;
-    }
-    .sidebar { display: none; }
-    .main-header, header { left: 0; }
-}
-
-/* Keep your font rules */
-h1, h2, h3, h4, h5, h6 {
-    font-family: 'Poppins', sans-serif;
-    font-weight: 600;
-    letter-spacing: 0.2px;
-}
-
-.sidebar a { 
-    font-family: 'Inter', sans-serif;
-     font-weight: 500;
-     }
-.widget h2, .widget-title { 
-    font-family: 'Poppins', sans-serif; 
-    font-weight: 600; 
-}
-
-button { font-family: 'Inter', sans-serif; 
-    font-weight: 500;
- }
-input, select, textarea { 
-    font-family: 'Inter', sans-serif; 
-}
-
-/* small utility */
-.text-muted { color: rgba(0,0,0,0.5); }
-
-
-/* private-notes section */
+/* ================================
+   NOTES WIDGET
+   ================================ */
 
 #notes-text {
-    width: 95%;
-    height: 100px;
-    padding: 10px;
+    width: 100%;
+    min-height: 120px;
+    padding: 12px;
+    border: 1px solid var(--widget-border);
     border-radius: 8px;
-    border: 1px solid #ccc;
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Inter', sans-serif;
+    font-size: 0.9rem;
+    resize: vertical;
+    outline: none;
+    transition: border 0.2s;
+    margin-bottom: 12px;
 }
 
+#notes-text:focus {
+    border-color: var(--btn-bg);
+}
 
+/* ================================
+   FULL WIDTH BUTTONS
+   ================================ */
+
+.full-btn {
+    width: 100%;
+    padding: 11px;
+    background: var(--btn-bg);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.9rem;
+    font-weight: 500;
+    transition: background 0.2s, transform 0.2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    margin-top: 5px;
+}
+
+.full-btn:hover {
+    background: var(--btn-hover);
+    transform: translateY(-1px);
+}
+
+.full-btn:disabled {
+    background: #888;
+    cursor: not-allowed;
+    transform: none;
+}
+
+/* Widget generic button (for quote "New Quote" button etc) */
+.widget button:not(.full-btn):not(.input-row button):not(#close-sidebar) {
+    padding: 8px 16px;
+    background: var(--btn-bg);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.85rem;
+    font-weight: 500;
+    transition: background 0.2s, transform 0.2s;
+}
+
+.widget button:not(.full-btn):not(.input-row button):not(#close-sidebar):hover {
+    background: var(--btn-hover);
+    transform: translateY(-1px);
+}
+
+/* ================================
+   TOAST MESSAGE
+   ================================ */
+
+.toast-message {
+    position: fixed;
+    bottom: 25px;
+    right: 25px;
+    background: var(--btn-bg);
+    color: white;
+    padding: 12px 20px;
+    border-radius: 10px;
+    font-size: 0.9rem;
+    box-shadow: 0 6px 20px var(--shadow);
+    z-index: 9999;
+    font-family: 'Inter', sans-serif;
+    transition: opacity 0.4s ease;
+}
+
+/* ================================
+   FOOTER
+   ================================ */
 
 .footer {
+    background: var(--header-bg);
+    border-top: 1px solid var(--widget-border);
     text-align: center;
-    margin-left: 220px;
+    padding: 18px;
+    font-size: 0.85rem;
+    color: var(--text);
+    opacity: 0.7;
+    margin-left: 230px;
+}
+
+/* ================================
+   SPINNER
+   ================================ */
+
+.spinner {
+    text-align: center;
     padding: 20px;
-    color: #555;
-    position: relative;
-    
+    opacity: 0.7;
+}
+
+/* ================================
+   RESPONSIVE - TABLET (max 768px)
+   ================================ */
+
+@media (max-width: 900px) {
+
+    /* Show hamburger button */
+    #menu-btn {
+        display: block;
+    }
+
+    /* Show close button inside sidebar */
+    #close-sidebar {
+        display: inline-block;
+    }
+
+    /* Sidebar moves off-screen by default */
+    .sidebar {
+        transform: translateX(-100%);
+    }
+
+    /* Sidebar slides in when .open class is added */
+    .sidebar.open {
+        transform: translateX(0);
+    }
+
+    /* Header takes full width */
+    .main-header {
+        left: 0;
+        padding: 0 20px 0 65px; /* left padding for hamburger button */
+    }
+
+    /* Dashboard takes full width */
+    .dashboard {
+        margin-left: 0;
+        padding: 15px;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    }
+
+    /* Footer full width */
+    .footer {
+        margin-left: 0;
+    }
+
+    /* Settings panel fits better on tablet */
+    #settings-panel {
+        width: 240px;
+        right: 15px;
+    }
+}
+
+/* ================================
+   RESPONSIVE - MOBILE (max 480px)
+   ================================ */
+
+@media (max-width: 480px) {
+
+    .main-header h1 {
+        font-size: 1rem;
+    }
+
+    .header-buttons button {
+        padding: 7px 10px;
+        font-size: 0.78rem;
+    }
+
+    /* Stack all widgets in single column */
+    .dashboard {
+        grid-template-columns: 1fr;
+        padding: 12px;
+        gap: 14px;
+    }
+
+    .widget {
+        padding: 16px;
+    }
+
+    #clock-display .digital {
+        font-size: 1.6rem;
+    }
+
+    /* Settings panel full-ish width on phone */
+    #settings-panel {
+        width: calc(100% - 30px);
+        right: 15px;
+        left: 15px;
+    }
+
+    .toast-message {
+        bottom: 15px;
+        right: 15px;
+        left: 15px;
+        text-align: center;
+    }
+
+    .header-buttons {
+        gap: 6px;
+    }
 }
