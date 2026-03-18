@@ -5,6 +5,175 @@ rt<!DOCTYPE html>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title> Personal Dashboard </title>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Personal Dashboard</title>
+
+    <!-- Meta tags -->
+    <meta name="description" content="A personalized productivity dashboard including clock, calendar, quote, to-do list, goals tracker and more.">
+    <meta name="author" content="Abhishek Kumar">
+
+    <!-- Font Awesome icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="index.css">
+</head>
+
+<body class="light">
+
+    <!-- Hamburger button - only shows on mobile -->
+    <button id="menu-btn" aria-label="Open menu">
+        <i class="fas fa-bars"></i>
+    </button>
+
+    <!-- Dark overlay - appears behind sidebar on mobile -->
+    <div id="sidebar-overlay"></div>
+
+    <!-- Sidebar Navigation -->
+    <nav class="sidebar" id="sidebar" aria-label="Main Navigation">
+
+        <!-- Close button inside sidebar - only on mobile -->
+        <button id="close-sidebar" aria-label="Close menu">
+            <i class="fas fa-times"></i>
+        </button>
+
+        <div class="sidebar-logo">
+            <i class="fas fa-th-large"></i>
+            <span>Dashboard</span>
+        </div>
+
+        <ul>
+            <li><a href="#"><i class="fas fa-home"></i> Dashboard</a></li>
+            <li><a href="#todo-section"><i class="fas fa-list"></i> To-Do</a></li>
+            <li><a href="#goals-section"><i class="fas fa-bullseye"></i> Goals</a></li>
+            <li><a href="#notes-section"><i class="fas fa-sticky-note"></i> Private Notes</a></li>
+            <li><a href="#settings-panel"><i class="fas fa-cog"></i> Export Data</a></li>
+        </ul>
+    </nav>
+
+    <!-- Top Header -->
+    <header class="main-header">
+        <h1>Personal Dashboard</h1>
+        <div class="header-buttons">
+            <button id="settings-toggle"><i class="fas fa-cog"></i> Settings</button>
+            <button id="theme-toggle">🌙 Theme</button>
+        </div>
+    </header>
+
+    <!-- Settings Panel (popup) -->
+    <aside id="settings-panel" class="hidden">
+        <h2><i class="fas fa-cog"></i> Settings</h2>
+        <label>
+            <input type="checkbox" id="show-quote"> Show Quote Widget
+        </label>
+        <div class="settings-actions">
+            <button id="export-data"><i class="fas fa-file-export"></i> Export Data</button>
+        </div>
+    </aside>
+
+    <!-- Main Dashboard Grid -->
+    <main class="dashboard">
+
+        <!-- Clock Widget -->
+        <section class="widget" id="clock-section">
+            <h2><i class="fas fa-clock"></i> Clock</h2>
+            <div id="clock-display"></div>
+        </section>
+
+        <!-- Calendar Widget -->
+        <section class="widget" id="calendar-widget">
+            <h2><i class="fas fa-calendar"></i> Calendar</h2>
+            <div id="calendar-container"></div>
+        </section>
+
+        <!-- Quote Widget -->
+        <section class="widget" id="quote-widget">
+            <h2><i class="fas fa-quote-left"></i> Quote of the Day</h2>
+            <div id="quote-display"></div>
+        </section>
+
+        <!-- To-Do List Widget -->
+        <section class="widget" id="todo-section">
+            <h2><i class="fas fa-list-check"></i> To-Do List</h2>
+            <div class="input-row">
+                <input type="text" id="todo-input" placeholder="Add a new task...">
+                <button id="add-todo"><i class="fas fa-plus"></i></button>
+            </div>
+            <ul id="todo-list"></ul>
+            <button id="start-pomodoro" class="full-btn">
+                <i class="fas fa-stopwatch"></i> Start Pomodoro (25 min)
+            </button>
+        </section>
+
+        <!-- Goals Tracker Widget -->
+        <section class="widget" id="goals-section">
+            <h2><i class="fas fa-bullseye"></i> Goals Tracker</h2>
+            <div class="input-row">
+                <input type="text" id="goal-input" placeholder="Add a new goal...">
+                <button id="add-goal"><i class="fas fa-plus"></i></button>
+            </div>
+            <div id="goals-list"></div>
+        </section>
+
+        <!-- Private Notes Widget -->
+        <section class="widget" id="notes-section">
+            <h2><i class="fas fa-sticky-note"></i> Private Notes</h2>
+            <textarea id="notes-text" placeholder="Write your private notes here..."></textarea>
+            <div class="notes-actions">
+                <button id="save-notes-btn" class="full-btn">
+                    <i class="fas fa-save"></i> Save Notes
+                </button>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <p>&copy; 2025 Personal Dashboard &bull; Built with HTML, CSS &amp; JavaScript</p>
+    </footer>
+
+    <!-- Mobile sidebar open/close - simple vanilla JS -->
+    <script>
+        const menuBtn = document.getElementById('menu-btn');
+        const closeSidebarBtn = document.getElementById('close-sidebar');
+        const sidebar = document.getElementById('sidebar');
+        const overlay = document.getElementById('sidebar-overlay');
+
+        menuBtn.addEventListener('click', function() {
+            sidebar.classList.add('open');
+            overlay.classList.add('show');
+        });
+
+        closeSidebarBtn.addEventListener('click', function() {
+            sidebar.classList.remove('open');
+            overlay.classList.remove('show');
+        });
+
+        overlay.addEventListener('click', function() {
+            sidebar.classList.remove('open');
+            overlay.classList.remove('show');
+        });
+
+        // Close sidebar when nav link clicked on mobile
+        sidebar.querySelectorAll('a').forEach(function(link) {
+            link.addEventListener('click', function() {
+                sidebar.classList.remove('open');
+                overlay.classList.remove('show');
+            });
+        });
+    </script>
+
+    <script src="app.js" type="module"></script>
+</body>
+</html>
 
     <!-- professional Meta tags -->
     <meta name="description" content="A personalized productivity dashboard including clock, calendar, weather, quote widget, to-do list, goals tracker and more.">
